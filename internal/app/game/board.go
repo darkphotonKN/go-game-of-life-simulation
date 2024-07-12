@@ -2,6 +2,8 @@ package game
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 type board struct {
@@ -15,6 +17,8 @@ func NewBoard() *board {
 	b := &board{}
 
 	b.initGrid(10)
+
+	b.seedGrid(5)
 
 	return b
 }
@@ -36,6 +40,23 @@ func (b *board) initGrid(width int) {
 
 	b.Width = width
 	b.Height = width
+}
+
+// seed grid
+
+func (b *board) seedGrid(x int) {
+	// randomly pick x number of spots
+
+	source := rand.NewSource(time.Now().UnixNano())
+	random := rand.New(source)
+
+	for i := 0; i < x; i++ {
+
+		randomRow := random.Intn(b.Width)  // Generate random numbers between 0 and x
+		randomCol := random.Intn(b.Height) // Generate random numbers between 0 and x
+
+		b.Grid[randomRow][randomCol] = true
+	}
 }
 
 // visualize grid
