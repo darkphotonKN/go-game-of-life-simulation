@@ -10,6 +10,5 @@ func main() {
 
 	gameOfLife := game.NewBoard()
 
-	gameOfLife.Visualize()
-
+	gameOfLife.Simulation()
 }
